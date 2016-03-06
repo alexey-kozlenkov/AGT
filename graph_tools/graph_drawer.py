@@ -24,11 +24,8 @@ def init_canvas(plotter, title, n):
     return ax
 
 
-def get_label_color(vertex, labels):
-    mfc = 'black'
-    if labels is not None and vertex not in labels:
-        mfc = 'none'
-    return mfc
+def get_label_color(vertex, labels, label_color):
+    return label_color if vertex in labels else 'black'
 
 def get_line_width(v, u, skeleton):
     if skeleton is not None:
@@ -37,7 +34,7 @@ def get_line_width(v, u, skeleton):
     return 1, 'blue'
 
 
-def draw_graph(n, adjacency_list, title='Graph', filename='graph', labels=None, skeleton=None):
+def draw_graph(n, adjacency_list, title='Graph', filename='graph', labels=None, label_color='red', skeleton=None):
     points = init_points(n)
     ax = init_canvas(plot, title, n)
 
@@ -45,8 +42,8 @@ def draw_graph(n, adjacency_list, title='Graph', filename='graph', labels=None, 
         adjacency = adjacency_list.get(vertex)
         coordinates = points.get(vertex)
 
-        mfc = get_label_color(vertex, labels)
-        plot.plot(coordinates[0], coordinates[1], marker='o', mfc=mfc, markersize=12)
+        mfc = get_label_color(vertex, labels, label_color)
+        plot.plot(coordinates[0], coordinates[1], marker='o', mfc=mfc, markersize=12, zorder=3)
         ax.text(coordinates[0] * 1.2, coordinates[1] * 1.2, str(vertex))
 
         for adjacent_vertex in adjacency:
