@@ -2,21 +2,6 @@ __author__ = 'Alexey'
 import graph_tools.common_utils as utils
 
 
-def get_simple_vertex_cover(adjacency_param):
-    """
-    :type adjacency_param: dict
-    :return: list of vertices which form a vertex cover.
-    """
-    adjacency = adjacency_param.copy()
-    vertex_cover = []
-    size, max_vertex = utils.get_max_vertex(adjacency)
-    while size > 0:
-        vertex_cover.append(max_vertex)
-        utils.remove_vertex(max_vertex, adjacency)
-        size, max_vertex = utils.get_max_vertex(adjacency)
-    return sorted(vertex_cover)
-
-
 def depth_first_search(start, target, adjacency, path, labels=None):
     """
     Looks for a path from start vertex to target vertex, using adjacency list
@@ -72,3 +57,15 @@ def build_minimum_spanning_tree(vertices, weights, dss):
             result.append((v, u))
             dss.unite(v, u)
     return result
+
+
+def find_maximum_independent_set(adjacency):
+    """
+    Returns the independence-number of the graph
+    :type adjacency: dict
+    """
+    if not len(adjacency):
+        return 0
+    min_vertex = utils.get_min_vertex(adjacency)
+    return 1 + max([find_maximum_independent_set(utils.remove_vertex_with_surrounding(v, adjacency))
+                    for v in ([min_vertex] + adjacency[min_vertex])])

@@ -1,5 +1,6 @@
 __author__ = 'Alexey'
 from random import shuffle, randint
+import copy
 
 
 def sort_graph_adjacency(adjacency):
@@ -25,30 +26,27 @@ def shuffle_adjacency(adjacency):
     return shuffled
 
 
-def remove_vertex(vertex, adjacency):
+def remove_vertex(vertex, adjacency_param):
     """
-    :type adjacency: dict
+    :type adjacency_param: dict
     """
+    adjacency = copy.deepcopy(adjacency_param)
     adjacency_list = adjacency.get(vertex)
     for adjacent_vertex in adjacency_list:
-        vertex_adjacency_list = adjacency.get(adjacent_vertex)
-        vertex_adjacency_list.remove(vertex)
+        adjacency[adjacent_vertex].remove(vertex)
     adjacency.pop(vertex)
+    return adjacency
+
+def remove_vertex_with_surrounding(vertex, adjacency_param):
+    adjacency = copy.deepcopy(adjacency_param)
+    for vertex_to_remove in [vertex] + adjacency[vertex]:
+        adjacency = remove_vertex(vertex_to_remove, adjacency)
+    return adjacency
 
 
-def get_max_vertex(adjacency):
-    """
-    :type adjacency: dict
-    """
-    max_size = 0
-    max_size_vertex = 0
-    for vertex in adjacency.keys():
-        adjacency_list = adjacency.get(vertex)
-        if len(adjacency_list) > max_size:
-            max_size = len(adjacency_list)
-            max_size_vertex = vertex
-    yield max_size
-    yield max_size_vertex
+def get_min_vertex(adjacency):
+    sorted_keys = sorted(adjacency, key=lambda el: len(adjacency[el]))
+    return sorted_keys[0]
 
 
 def init_random_weights(adjacency, limit=None):
