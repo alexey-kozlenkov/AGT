@@ -4,7 +4,7 @@ from graph_tools.graph_builder import build_connected_grpah
 from graph_tools.graph_drawer import draw_graph
 from graph_tools.common_utils import init_random_weights
 from algorithms.algorithms import build_minimum_spanning_tree
-import labs.lab3.disjoint_set_structure as dss
+import labs.term_1.lab3.disjoint_set_structure as dss
 
 n = input("Enter vertices number: ")
 p = input("Enter probability: ")

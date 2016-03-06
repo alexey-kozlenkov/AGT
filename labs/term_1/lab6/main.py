@@ -1,5 +1,5 @@
 __author__ = 'Alexey'
-from functions import read_data, assign_students
+from labs.term_1.lab6.functions import read_data, assign_students
 
 students, universities, student_priorities, university_priorities, university_capacities = read_data('input2.txt')
 
