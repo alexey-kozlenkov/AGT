@@ -61,11 +61,16 @@ def build_minimum_spanning_tree(vertices, weights, dss):
 
 def find_maximum_independent_set(adjacency):
     """
-    Returns the independence-number of the graph
+    Computing MIS and independence number for a graph.
     :type adjacency: dict
     """
     if not len(adjacency):
-        return 0
+        return 0, set()
     min_vertex = utils.get_min_vertex(adjacency)
-    return 1 + max([find_maximum_independent_set(utils.remove_vertex_with_surrounding(v, adjacency))
-                    for v in ([min_vertex] + adjacency[min_vertex])])
+    variants = {}
+    for v in [min_vertex] + adjacency[min_vertex]:
+        independence_number, mis = find_maximum_independent_set(utils.remove_vertex_with_surrounding(v, adjacency))
+        mis.add(v)
+        variants[independence_number] = mis
+    max_independence_number = max(variants.keys())
+    return 1 + max_independence_number, variants[max_independence_number]
