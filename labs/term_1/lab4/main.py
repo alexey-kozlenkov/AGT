@@ -22,4 +22,4 @@ print 'Weights: ' + str(weights)
 skeleton = build_minimum_spanning_tree(vertices, weights, dss)
 print 'Minimum spanning tree: ' + str(skeleton)
 
-draw_graph(n, adjacency, title='Connected graph', skeleton=skeleton)
+draw_graph(adjacency, p, title='Connected graph', skeleton=skeleton)

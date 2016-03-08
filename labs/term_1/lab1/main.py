@@ -12,4 +12,4 @@ if type(n) != int or type(p) != float:
 vertices, adjacency = build_random_graph(n, p)
 print(adjacency)
 
-draw_graph(n, adjacency, 'Random graph, n=%d, p=%.2f' % (n, p))
+draw_graph(adjacency, p, title='Random graph')

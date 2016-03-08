@@ -14,19 +14,21 @@ def init_points(n):
     return points
 
 
-def init_canvas(plotter, title, n):
+def init_canvas(plotter, title, n, p):
     fig = plotter.figure(figsize=(7.5, 7.5), dpi=80)
     ax = fig.add_subplot(111)
     plotter.xlim([-1.3, 1.3])
     plotter.ylim([-1.3, 1.3])
     plotter.axis('off')
     plotter.title(title if title else 'Graph on ' + str(n) + ' vertices')
+    props = dict(boxstyle='round', facecolor='white')
+    plotter.text(-1.5, 1, 'Random graph\nn = %d\np = %.2f' % (n, p), bbox=props)
     plotter.xkcd()
     return ax
 
 
 def get_label_color(vertex, labels, label_color):
-    return label_color if vertex in labels else 'black'
+    return label_color if labels and vertex in labels else 'black'
 
 
 def get_line_style(v, u, skeleton):
@@ -36,9 +38,10 @@ def get_line_style(v, u, skeleton):
     return 1.5, 'blue'
 
 
-def draw_graph(n, adjacency_list, title=None, filename='graph', labels=None, label_color='red', skeleton=None):
+def draw_graph(adjacency_list, p, title=None, filename='graph', labels=None, label_color='red', skeleton=None):
+    n = len(adjacency_list)
     points = init_points(n)
-    ax = init_canvas(plot, title, n)
+    ax = init_canvas(plot, title, n, p)
 
     for vertex in adjacency_list.keys():
         adjacency = adjacency_list.get(vertex)
