@@ -74,3 +74,14 @@ def find_maximum_independent_set(adjacency):
         variants[independence_number] = mis
     max_independence_number = max(variants.keys())
     return 1 + max_independence_number, variants[max_independence_number]
+
+
+def dichotomy(func, a, b, eps):
+    mid = a + float(b - a) / 2
+    y = func(mid)
+    if abs(y) < eps:
+        return mid
+    elif y < 0:
+        return dichotomy(func, mid, b, eps)
+    else:
+        return dichotomy(func, a, mid, eps)
