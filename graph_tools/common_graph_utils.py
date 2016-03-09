@@ -37,6 +37,7 @@ def remove_vertex(vertex, adjacency_param):
     adjacency.pop(vertex)
     return adjacency
 
+
 def remove_vertex_with_surrounding(vertex, adjacency_param):
     adjacency = copy.deepcopy(adjacency_param)
     for vertex_to_remove in [vertex] + adjacency[vertex]:
