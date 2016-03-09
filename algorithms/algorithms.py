@@ -1,5 +1,5 @@
 __author__ = 'Alexey'
-import graph_tools.common_utils as utils
+import graph_tools.common_graph_utils as utils
 
 
 def depth_first_search(start, target, adjacency, path, labels=None):
@@ -77,11 +77,13 @@ def find_maximum_independent_set(adjacency):
 
 
 def dichotomy(func, a, b, eps):
-    mid = a + float(b - a) / 2
+    mid = float(a + b) / 2
     y = func(mid)
-    if abs(y) < eps:
-        return mid
-    elif y < 0:
-        return dichotomy(func, mid, b, eps)
-    else:
-        return dichotomy(func, a, mid, eps)
+    while b - a > eps:
+        if y == 0:
+            return mid
+        elif y < 0:
+            return dichotomy(func, mid, b, eps)
+        else:
+            return dichotomy(func, a, mid, eps)
+    return b
