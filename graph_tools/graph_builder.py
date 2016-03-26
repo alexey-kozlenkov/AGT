@@ -36,11 +36,11 @@ def build_random_graph(n, p):
     yield adjacency
 
 
-def build_connected_grpah(n, p):
+def build_connected_graph(n, p):
     vertices = init_vertices(n)
     adjacency = init_random_graph(n, p, vertices)
     while not check_connectivity(vertices, adjacency):
-        print ('Rebuild graph due to its disconnection.')
+        print ('Rebuild graph due to its disunity.')
         vertices = init_vertices(n)
         adjacency = init_random_graph(n, p, vertices)
     yield vertices
