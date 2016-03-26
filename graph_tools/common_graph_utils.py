@@ -30,12 +30,17 @@ def remove_vertex(vertex, adjacency_param):
     """
     :type adjacency_param: dict
     """
-    adjacency = copy.deepcopy(adjacency_param)
-    adjacency_list = adjacency.get(vertex)
-    for adjacent_vertex in adjacency_list:
-        adjacency[adjacent_vertex].remove(vertex)
-    adjacency.pop(vertex)
-    return adjacency
+    if vertex in adjacency_param:
+        adjacency = copy.deepcopy(adjacency_param)
+        adjacency_list = adjacency.get(vertex)
+        for adjacent_vertex in adjacency_list:
+            adjacency[adjacent_vertex].remove(vertex)
+            if not adjacency[adjacent_vertex]:
+                adjacency.pop(adjacent_vertex)
+        adjacency.pop(vertex)
+        return adjacency
+    else:
+        return adjacency_param
 
 
 def remove_vertex_with_surrounding(vertex, adjacency_param):
