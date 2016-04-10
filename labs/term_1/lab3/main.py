@@ -1,6 +1,6 @@
 __author__ = 'Alexey'
-from labs.term_1.lab3.disjoint_set_structure import init_data, unite
-from labs.term_1.lab3 import disjoint_set_structure as dss
+from algorithms.disjoint_set_structure import init_data, unite
+from algorithms import disjoint_set_structure as dss
 
 logfile = open("log.txt")
 persons = logfile.readline().strip().split(' ')
