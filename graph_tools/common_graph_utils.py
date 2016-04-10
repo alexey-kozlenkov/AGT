@@ -56,7 +56,7 @@ def get_min_vertex(adjacency):
 
 
 def init_random_weights(adjacency, limit=None):
-    if limit is None:
+    if not limit:
         limit = len(adjacency) * 2
     weights = {}
     for v in adjacency.keys():
