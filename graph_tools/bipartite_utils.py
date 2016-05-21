@@ -1,3 +1,5 @@
+from graph_tools.graph_builder import create_edge
+
 __author__ = 'Alexey'
 from algorithms.algorithms import depth_first_search
 
@@ -126,3 +128,29 @@ def build_maximum_matching(left, right, edges_param):
         matching = rebuild_matching(matching, chain)
         chain = find_augmenting_chain(matching)
     return matching
+
+
+def simple_divide_vertices(vertices):
+    left = vertices[::2]
+    right = vertices[1::2]
+    return left, right
+
+
+def extract_bipartite_adjacency(adjacency, left, right):
+    bipartite_adjacency = {v: [] for v in adjacency.keys()}
+    for v in left:
+        adjacency_list = adjacency[v]
+        for u in adjacency_list:
+            if u in right:
+                create_edge(v, u, bipartite_adjacency)
+    return bipartite_adjacency
+
+
+def move_vertex(v, left, right):
+    if v in left:
+        left.remove(v)
+        right.append(v)
+    elif v in right:
+        right.remove(v)
+        left.append(v)
+    return left, right

@@ -65,3 +65,12 @@ def init_random_weights(adjacency, limit=None):
                 weight = randint(1, limit)
                 weights[(v, u)] = weight
     return weights
+
+
+def get_edges(adjacency):
+    edges = []
+    for v in adjacency:
+        adjacent_vertices = adjacency[v]
+        for u in adjacent_vertices:
+            edges.append((v, u))
+    return edges
