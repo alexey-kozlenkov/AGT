@@ -1,6 +1,5 @@
-from graph_tools.graph_drawer import draw_graph
-
 __author__ = 'Alexey'
+from graph_tools.graph_drawer import draw_graph
 from copy import deepcopy
 from random import uniform
 
