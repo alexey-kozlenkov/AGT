@@ -7,4 +7,4 @@ p = 0.3
 
 vertices, adjacency = build_random_graph(n, p)
 approximate_cover = vertex_cover(adjacency)
-draw_graph(adjacency, p, title='Approximate vertex cover', labels=approximate_cover)
+draw_graph(adjacency, p, title='Approximate vertex cover', labels=[(approximate_cover, 'red')])

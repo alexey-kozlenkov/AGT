@@ -23,7 +23,7 @@ spanning_tree = build_minimum_spanning_tree(vertices, weights, dss)
 
 for empty_vertex in difference:
     adjacency[empty_vertex] = []
-draw_graph(adjacency, 1, 'Steiner tree', labels=difference, label_color='gray', skeleton=spanning_tree)
+draw_graph(adjacency, 1, 'Steiner tree', labels=[(difference, 'gray')], skeleton=spanning_tree)
 
 for edge in sorted(weights, key=weights.get):
     print str(edge) + ': ', str(weights[edge]) + '; ',

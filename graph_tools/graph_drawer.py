@@ -27,8 +27,11 @@ def init_canvas(plotter, title, n, p):
     return ax
 
 
-def get_label_color(vertex, labels, label_color):
-    return label_color if labels and vertex in labels else 'black'
+def get_label_color(vertex, labels):
+    for label_vertex, color in labels if labels else []:
+        if vertex in label_vertex:
+            return color
+    return 'black'
 
 
 def get_line_style(v, u, skeleton):
@@ -47,7 +50,7 @@ def draw_graph(adjacency_list, p, title=None, filename='graph', labels=None, lab
         adjacency = adjacency_list.get(vertex)
         coordinates = points.get(vertex)
 
-        mfc = get_label_color(vertex, labels, label_color)
+        mfc = get_label_color(vertex, labels)
         plot.plot(coordinates[0], coordinates[1], marker='o', mfc=mfc, markersize=12, zorder=3)
         ax.text(coordinates[0] * 1.15, coordinates[1] * 1.15, str(vertex))
 
